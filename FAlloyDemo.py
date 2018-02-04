@@ -6,11 +6,25 @@ from FAlloyParser import FAlloyParser
 import sys
 
 class FAlloyPrintListener(FAlloyListener):
-    def enterHi(self, ctx):
-        print("FAlloy: %s" % ctx.ID())
+    def exitSpecification(self, ctx: FAlloyParser.SpecificationContext):
+        print("")
+
+    def exitModule(self, ctx: FAlloyParser.ModuleContext):
+        print("")
+
+    def exitOpen(self, ctx:FAlloyParser.OpenContext):
+        print("")
+
+    def exitParagraph(self, ctx:FAlloyParser.ParagraphContext):
+        print("")
+
+    def visitTerminal(self, node: TerminalNode):
+        print(node.symbol.text, end=" ")
+
 
 def main():
-    fin = open("../f_test_3.als", "r")
+    #fin = open("../f_test_3.als", "r")
+    fin = open("f_test_3.als", "r")
     lexer = FAlloyLexer(InputStream(fin.read()))
     stream = CommonTokenStream(lexer)
     parser = FAlloyParser(stream)

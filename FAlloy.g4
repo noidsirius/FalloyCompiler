@@ -4,18 +4,17 @@ specification : module? open* paragraph*;
 
 module : 'module' name  ('['  ('exactly')? name  (',' ('exactly')? NUMBER)*    ']')?;
 
-/*REMINDER: CHANGED ref,*/
 open : ('private')?  'open'  name  ('[' (ref (',' ref)*) ']')?  ('as' name)?;
 
-paragraph : factDecl | assertDecl | funDecl | cmdDecl | enumDecl | sigDecl;
+paragraph :  factDecl | assertDecl | funDecl | cmdDecl | enumDecl | sigDecl;
+
 
 factDecl : 'fact' name? block;
 
 assertDecl : 'assert' name? block;
-/*REMINDER: CHANGED decl,*/
-funDecl : ('private')? 'fun' (ref '.')? name '(' (decl (',' decl)*)? ')' ':' expr block
-        | ('private')? 'fun' (ref '.')? name '[' (decl (',' decl)*)? ']' ':' expr block
-        | ('private')? 'fun' (ref '.')? name                ':' expr block
+funDecl : ('private')? 'fun' (ref '.')? name '(' (decl (',' decl)*)? ')' ':' rootExpr block
+        | ('private')? 'fun' (ref '.')? name '[' (decl (',' decl)*)? ']' ':' rootExpr block
+        | ('private')? 'fun' (ref '.')? name                ':' rootExpr block
         | ('private')? 'pred' (ref '.')? name '(' (decl (',' decl)*)? ')' block
         | ('private')? 'pred' (ref '.')? name '[' (decl (',' decl)*)? ']' block
         | ('private')? 'pred' (ref '.')? name                block;
@@ -38,16 +37,27 @@ sigQual : 'abstract' | 'lone' | 'one' | 'some' | 'private';
 sigExt : 'extends' ref
        | 'in' ref ('+' ref)*;
 
-expr : 'let' (letDecl (',' letDecl)*) blockOrBar
-       | quant (decl (',' decl)*)    blockOrBar
-       | unOp expr
+rootExpr : letOrDeclExpr;
+letOrDeclExpr : 'let' (letDecl (',' letDecl)*) blockOrBar | quant (decl (',' decl)*) blockOrBar | lExpr;
+quant : 'all' | 'no' | 'some' | 'lone' | 'one' | 'sum';
+// L = Logic
+lExpr : '(' lExpr ')' | lExpr ('=>'|'implies') lExpr 'else' lExpr | lExpr lOpt lExpr | lCExpr;
+lOpt : '||' | 'or' | '&&' | 'and' | '<=>' | 'iff' | '=>' | 'implies' ;
+// C = Compare
+lCExpr : lCExpr ('!'|'not')? cOp lCExpr | unHighOp lCExpr | binLogicExpr;
+cOp : '=' | 'in' | '<' | '>' | '=<' | '>=';
+unHighOp : '!' | 'not' | 'no' | 'some' | 'lone' | 'one' | 'set' | 'seq' | '#';
+
+binLogicExpr : binLogicExpr otherBinOp binLogicExpr | binLogicExpr fuzzyCompareOp binLogicExpr | arrowExpr;
+otherBinOp : '&' | '+' | '-' | '++' | '<:' | ':>'  | '<<' | '>>' | '>>>';
+fuzzyCompareOp : 'is';
+
+arrowExpr : joinExpr | arrowExpr arrowOp arrowExpr;
+
+joinExpr : joinExpr '.' joinExpr | joinExpr '[' (rootExpr (',' rootExpr)*)? ']' | expr;
+
+expr : unLowOp expr
        | fuzzyUnOp expr
-       | expr fuzzyCompareOp expr
-       | expr binOp expr
-       | expr arrowOp expr
-       | expr ('!'|'not')? compareOp expr
-       | expr ('=>'|'implies') expr 'else' expr
-       | expr '[' (expr (',' expr)*)? ']'
        |     NUMBER
        | '-' NUMBER
        | 'none'
@@ -55,38 +65,39 @@ expr : 'let' (letDecl (',' letDecl)*) blockOrBar
        | 'univ'
        | 'Int'
        | 'seq/Int'
-       | '(' expr ')'
        | ('@')? name
        | block
        | '{' (decl (',' decl)*) blockOrBar '}';
 
+
+unLowOp:  '~' | '*' | '^';
+
 declOrFuzzyDecl : fuzzyDecl | decl;
 
-decl : ('private')? ('disj')? (name (',' name)*) ':' ('disj')? expr;
+decl : ('private')? ('disj')? (name (',' name)*) ':' ('disj')? rootExpr;
 
-fuzzyDecl : ('private')? ('disj')? (name (',' name)*) ':' 'fuzzy' expr;
+fuzzyDecl : ('private')? ('disj')? (name (',' name)*) ':' 'fuzzy' rootExpr;
 
-letDecl : name '=' expr;
+letDecl : name '=' rootExpr;
 
-quant : 'all' | 'no' | 'some' | 'lone' | 'one' | 'sum';
 
 fuzzyUnOp :  'none' | 'slightly' | 'half' | 'mostly' | 'fully';
 
-fuzzyCompareOp : 'is';
+
 
 binOp : '||' | 'or' | '&&' | 'and' | '&' | '<=>' | 'iff'
         | '=>' | 'implies' | '+' | '-' | '++' | '<:' | ':>' | '.' | '<<' | '>>' | '>>>';
 
 arrowOp : ('some'|'one'|'lone'|'set')? '->' ('some'|'one'|'lone'|'set')?;
 
-compareOp : '=' | 'in' | '<' | '>' | '=<' | '>=';
 
-unOp : '!' | 'not' | 'no' | 'some' | 'lone' | 'one' | 'set' | 'seq' | '#' | '~' | '*' | '^';
 
-block : '{' expr* '}';
+
+
+block : '{' rootExpr* '}';
 
 blockOrBar : block
-           | '|' expr;
+           | '|' rootExpr;
 
 name : ('this' | ID) ('/' ID)*;
 NUMBER: [0-9]+;

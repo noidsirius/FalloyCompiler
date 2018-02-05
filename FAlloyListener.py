@@ -134,12 +134,147 @@ class FAlloyListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by FAlloyParser#rootExpr.
+    def enterRootExpr(self, ctx:FAlloyParser.RootExprContext):
+        pass
+
+    # Exit a parse tree produced by FAlloyParser#rootExpr.
+    def exitRootExpr(self, ctx:FAlloyParser.RootExprContext):
+        pass
+
+
+    # Enter a parse tree produced by FAlloyParser#letOrDeclExpr.
+    def enterLetOrDeclExpr(self, ctx:FAlloyParser.LetOrDeclExprContext):
+        pass
+
+    # Exit a parse tree produced by FAlloyParser#letOrDeclExpr.
+    def exitLetOrDeclExpr(self, ctx:FAlloyParser.LetOrDeclExprContext):
+        pass
+
+
+    # Enter a parse tree produced by FAlloyParser#quant.
+    def enterQuant(self, ctx:FAlloyParser.QuantContext):
+        pass
+
+    # Exit a parse tree produced by FAlloyParser#quant.
+    def exitQuant(self, ctx:FAlloyParser.QuantContext):
+        pass
+
+
+    # Enter a parse tree produced by FAlloyParser#lExpr.
+    def enterLExpr(self, ctx:FAlloyParser.LExprContext):
+        pass
+
+    # Exit a parse tree produced by FAlloyParser#lExpr.
+    def exitLExpr(self, ctx:FAlloyParser.LExprContext):
+        pass
+
+
+    # Enter a parse tree produced by FAlloyParser#lOpt.
+    def enterLOpt(self, ctx:FAlloyParser.LOptContext):
+        pass
+
+    # Exit a parse tree produced by FAlloyParser#lOpt.
+    def exitLOpt(self, ctx:FAlloyParser.LOptContext):
+        pass
+
+
+    # Enter a parse tree produced by FAlloyParser#lCExpr.
+    def enterLCExpr(self, ctx:FAlloyParser.LCExprContext):
+        pass
+
+    # Exit a parse tree produced by FAlloyParser#lCExpr.
+    def exitLCExpr(self, ctx:FAlloyParser.LCExprContext):
+        pass
+
+
+    # Enter a parse tree produced by FAlloyParser#cOp.
+    def enterCOp(self, ctx:FAlloyParser.COpContext):
+        pass
+
+    # Exit a parse tree produced by FAlloyParser#cOp.
+    def exitCOp(self, ctx:FAlloyParser.COpContext):
+        pass
+
+
+    # Enter a parse tree produced by FAlloyParser#unHighOp.
+    def enterUnHighOp(self, ctx:FAlloyParser.UnHighOpContext):
+        pass
+
+    # Exit a parse tree produced by FAlloyParser#unHighOp.
+    def exitUnHighOp(self, ctx:FAlloyParser.UnHighOpContext):
+        pass
+
+
+    # Enter a parse tree produced by FAlloyParser#binLogicExpr.
+    def enterBinLogicExpr(self, ctx:FAlloyParser.BinLogicExprContext):
+        pass
+
+    # Exit a parse tree produced by FAlloyParser#binLogicExpr.
+    def exitBinLogicExpr(self, ctx:FAlloyParser.BinLogicExprContext):
+        pass
+
+
+    # Enter a parse tree produced by FAlloyParser#otherBinOp.
+    def enterOtherBinOp(self, ctx:FAlloyParser.OtherBinOpContext):
+        pass
+
+    # Exit a parse tree produced by FAlloyParser#otherBinOp.
+    def exitOtherBinOp(self, ctx:FAlloyParser.OtherBinOpContext):
+        pass
+
+
+    # Enter a parse tree produced by FAlloyParser#fuzzyCompareOp.
+    def enterFuzzyCompareOp(self, ctx:FAlloyParser.FuzzyCompareOpContext):
+        pass
+
+    # Exit a parse tree produced by FAlloyParser#fuzzyCompareOp.
+    def exitFuzzyCompareOp(self, ctx:FAlloyParser.FuzzyCompareOpContext):
+        pass
+
+
+    # Enter a parse tree produced by FAlloyParser#fuzzyUnOp.
+    def enterFuzzyUnOp(self, ctx:FAlloyParser.FuzzyUnOpContext):
+        pass
+
+    # Exit a parse tree produced by FAlloyParser#fuzzyUnOp.
+    def exitFuzzyUnOp(self, ctx:FAlloyParser.FuzzyUnOpContext):
+        pass
+
+
+    # Enter a parse tree produced by FAlloyParser#arrowExpr.
+    def enterArrowExpr(self, ctx:FAlloyParser.ArrowExprContext):
+        pass
+
+    # Exit a parse tree produced by FAlloyParser#arrowExpr.
+    def exitArrowExpr(self, ctx:FAlloyParser.ArrowExprContext):
+        pass
+
+
+    # Enter a parse tree produced by FAlloyParser#joinExpr.
+    def enterJoinExpr(self, ctx:FAlloyParser.JoinExprContext):
+        pass
+
+    # Exit a parse tree produced by FAlloyParser#joinExpr.
+    def exitJoinExpr(self, ctx:FAlloyParser.JoinExprContext):
+        pass
+
+
     # Enter a parse tree produced by FAlloyParser#expr.
     def enterExpr(self, ctx:FAlloyParser.ExprContext):
         pass
 
     # Exit a parse tree produced by FAlloyParser#expr.
     def exitExpr(self, ctx:FAlloyParser.ExprContext):
+        pass
+
+
+    # Enter a parse tree produced by FAlloyParser#unLowOp.
+    def enterUnLowOp(self, ctx:FAlloyParser.UnLowOpContext):
+        pass
+
+    # Exit a parse tree produced by FAlloyParser#unLowOp.
+    def exitUnLowOp(self, ctx:FAlloyParser.UnLowOpContext):
         pass
 
 
@@ -179,33 +314,6 @@ class FAlloyListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by FAlloyParser#quant.
-    def enterQuant(self, ctx:FAlloyParser.QuantContext):
-        pass
-
-    # Exit a parse tree produced by FAlloyParser#quant.
-    def exitQuant(self, ctx:FAlloyParser.QuantContext):
-        pass
-
-
-    # Enter a parse tree produced by FAlloyParser#fuzzyUnOp.
-    def enterFuzzyUnOp(self, ctx:FAlloyParser.FuzzyUnOpContext):
-        pass
-
-    # Exit a parse tree produced by FAlloyParser#fuzzyUnOp.
-    def exitFuzzyUnOp(self, ctx:FAlloyParser.FuzzyUnOpContext):
-        pass
-
-
-    # Enter a parse tree produced by FAlloyParser#fuzzyCompareOp.
-    def enterFuzzyCompareOp(self, ctx:FAlloyParser.FuzzyCompareOpContext):
-        pass
-
-    # Exit a parse tree produced by FAlloyParser#fuzzyCompareOp.
-    def exitFuzzyCompareOp(self, ctx:FAlloyParser.FuzzyCompareOpContext):
-        pass
-
-
     # Enter a parse tree produced by FAlloyParser#binOp.
     def enterBinOp(self, ctx:FAlloyParser.BinOpContext):
         pass
@@ -221,24 +329,6 @@ class FAlloyListener(ParseTreeListener):
 
     # Exit a parse tree produced by FAlloyParser#arrowOp.
     def exitArrowOp(self, ctx:FAlloyParser.ArrowOpContext):
-        pass
-
-
-    # Enter a parse tree produced by FAlloyParser#compareOp.
-    def enterCompareOp(self, ctx:FAlloyParser.CompareOpContext):
-        pass
-
-    # Exit a parse tree produced by FAlloyParser#compareOp.
-    def exitCompareOp(self, ctx:FAlloyParser.CompareOpContext):
-        pass
-
-
-    # Enter a parse tree produced by FAlloyParser#unOp.
-    def enterUnOp(self, ctx:FAlloyParser.UnOpContext):
-        pass
-
-    # Exit a parse tree produced by FAlloyParser#unOp.
-    def exitUnOp(self, ctx:FAlloyParser.UnOpContext):
         pass
 
 

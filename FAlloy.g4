@@ -50,14 +50,14 @@ unHighOp : '!' | 'not' | 'no' | 'some' | 'lone' | 'one' | 'set' | 'seq' | '#';
 
 binLogicExpr : binLogicExpr otherBinOp binLogicExpr | binLogicExpr fuzzyCompareOp binLogicExpr | arrowExpr;
 otherBinOp : '&' | '+' | '-' | '++' | '<:' | ':>'  | '<<' | '>>' | '>>>';
-fuzzyCompareOp : 'is';
+fuzzyCompareOp : 'is' fuzzyUnOp?;
+fuzzyUnOp :  'none' | 'slightly' | 'half' | 'mostly' | 'fully';
 
 arrowExpr : joinExpr | arrowExpr arrowOp arrowExpr;
 
 joinExpr : joinExpr '.' joinExpr | joinExpr '[' (rootExpr (',' rootExpr)*)? ']' | expr;
 
 expr : unLowOp expr
-       | fuzzyUnOp expr
        |     NUMBER
        | '-' NUMBER
        | 'none'
@@ -79,10 +79,6 @@ decl : ('private')? ('disj')? (name (',' name)*) ':' ('disj')? rootExpr;
 fuzzyDecl : ('private')? ('disj')? (name (',' name)*) ':' 'fuzzy' rootExpr;
 
 letDecl : name '=' rootExpr;
-
-
-fuzzyUnOp :  'none' | 'slightly' | 'half' | 'mostly' | 'fully';
-
 
 
 binOp : '||' | 'or' | '&&' | 'and' | '&' | '<=>' | 'iff'

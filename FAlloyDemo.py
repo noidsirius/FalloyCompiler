@@ -2,7 +2,7 @@
 from antlr4 import *
 from antlr4.tree.Tree import TerminalNodeImpl
 
-from FAlloyUtils import fuzzy_relations
+from FAlloyUtils import fuzzy_relations, adjective_mapper
 
 from FAlloyLexer import FAlloyLexer
 from FAlloyListener import FAlloyListener
@@ -17,6 +17,12 @@ from FAlloyParser import FAlloyParser
 #     return False
 
 class FAlloyPrintListener(FAlloyListener):
+    def enterEveryRule(self, ctx:ParserRuleContext):
+        if hasattr(ctx, "SKIP_PRINT"):
+            for child in ctx.children:
+                child.SKIP_PRINT = True
+
+
     def exitSpecification(self, ctx: FAlloyParser.SpecificationContext):
         print("")
 
@@ -39,25 +45,31 @@ class FAlloyPrintListener(FAlloyListener):
     def exitFuzzyDecl(self, ctx: FAlloyParser.FuzzyDeclContext):
         print("-> one FuzzyValue")
 
-    # def enterExpr(self, ctx: FAlloyParser.ExprContext):
-    #     if len(ctx.children) == 3 and isinstance(ctx.children[1], FAlloyParser.FuzzyCompareOpContext):
-    #         ctx.children[2].FUZZY_EQUAL_SECOND = True
-    #         print("fuzzyEQUAL[", end="")
-    #     if ctx.FUZZY_EQUAL_SECOND:
-    #         print(", ", end="")
-    #
-    # # Exit a parse tree produced by FAlloyParser#expr.
-    # def exitExpr(self, ctx: FAlloyParser.ExprContext):
-    #     if ctx.FUZZY_EQUAL_SECOND:
-    #         print("] ", end="")
-    #     pass
+    def enterBinLogicExpr(self, ctx: FAlloyParser.BinLogicExprContext):
+        if len(ctx.children) == 3 and isinstance(ctx.children[1], FAlloyParser.FuzzyCompareOpContext):
+            ctx.children[2].FUZZY_EQUAL_SECOND = True
+            ctx.children[1].children[0].SKIP_PRINT = True
+            ctx.FUZZY_EXPR = True
+            if len(ctx.children[1].children) > 1:
+                ctx.FUZZY_ADJECTIVE = ctx.children[1].children[1].children[0].symbol.text
+            else:
+                ctx.HAS_FUZZY_VALUE = True
+            print("fuzzyEQUAL[", end="")
+        if hasattr(ctx, 'FUZZY_EQUAL_SECOND'):
+            print(", ", end="")
+
+    def exitBinLogicExpr(self, ctx: FAlloyParser.BinLogicExprContext):
+        if hasattr(ctx, 'FUZZY_EXPR'):
+            print("] ", end="")
+            if hasattr(ctx, 'FUZZY_ADJECTIVE'):
+                print('in %s' % adjective_mapper[getattr(ctx, 'FUZZY_ADJECTIVE')], end="")
 
     def visitTerminal(self, node: TerminalNode):
+        if hasattr(node, "SKIP_PRINT"):
+            return
         if isinstance(node.parentCtx, FAlloyParser.FuzzyDeclContext):
             if node.symbol.text == 'fuzzy':
                 return
-        # if isinstance(node.parentCtx, FAlloyParser.FuzzyCompareOpContext):
-        #     return
         print(node.symbol.text, end=" ")
 
 

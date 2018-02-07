@@ -17,18 +17,26 @@ sig Customer {
 
 fact {
 	all c: Customer |
-		((c.rateFood is Rancid || c.rateService is Poor => c.tip is Cheap) &&
-		(c.rateService is Good => c.tip is Average) &&
-		(c.rateFood is Delicious || c.rateService is Excellent => c.tip is Generous)) || c.rateFood is Rancid
+		(c.rateFood = Rancid || c.rateService = Poor => c.tip = Cheap) &&
+		(c.rateService = Good => c.tip = Average) &&
+		(c.rateFood = Delicious || c.rateService = Excellent => c.tip = Generous)
+}
+
+fact {
+    all c : Customer | c.tip = Cheap && c.tip = Generous => c.tip = Average
 }
 
 assert asr_1 {
-	some c: Customer | c.rateService is Good && not c.tip is Average
+	some c: Customer | c.rateService = Good && not c.tip = Average
 }
 
 pred GenerousTip {
 	some c : Customer | c.tip is mostly Generous
 }
 
+pred GenerousTipPoorService {
+	some c : Customer | c.tip is mostly Generous && c.rateService is mostly Poor
+}
 
-run {} for 3
+
+run {} for 8 Int

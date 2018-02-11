@@ -7,7 +7,7 @@ import sys
 
 def serializedATN():
     with StringIO() as buf:
-        buf.write("\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3Z")
+        buf.write("\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3[")
         buf.write("\u0297\4\2\t\2\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7")
         buf.write("\4\b\t\b\4\t\t\t\4\n\t\n\4\13\t\13\4\f\t\f\4\r\t\r\4\16")
         buf.write("\t\16\4\17\t\17\4\20\t\20\4\21\t\21\4\22\t\22\4\23\t\23")
@@ -75,8 +75,8 @@ def serializedATN():
         buf.write(".\668*\2\4\6\b\n\f\16\20\22\24\26\30\32\34\36 \"$&(*,")
         buf.write(".\60\62\64\668:<>@BDFHJLNP\2\21\3\2\23\24\3\2\27\30\4")
         buf.write("\2\b\b #\4\2!#(*\3\2+,\4\2+,.\63\3\2\64\65\4\2%%\66:\7")
-        buf.write("\2\33\33!#))\64\65;<\4\2&&=D\3\2FJ\3\2PR\7\2\16\16&&+")
-        buf.write(",.\63=D\4\2!#;;\4\2WWZZ\2\u02de\2S\3\2\2\2\4a\3\2\2\2")
+        buf.write("\2\33\33!#))\64\65;<\4\2&&=D\3\2FJ\3\2OQ\7\2\16\16&&+")
+        buf.write(",.\63=D\4\2!#;;\4\2VVYY\2\u02de\2S\3\2\2\2\4a\3\2\2\2")
         buf.write("\6w\3\2\2\2\b\u0092\3\2\2\2\n\u0094\3\2\2\2\f\u009a\3")
         buf.write("\2\2\2\16\u011e\3\2\2\2\20\u0123\3\2\2\2\22\u0152\3\2")
         buf.write("\2\2\24\u0155\3\2\2\2\26\u0160\3\2\2\2\30\u017e\3\2\2")
@@ -94,7 +94,7 @@ def serializedATN():
         buf.write("\3\2\2\2_\3\3\2\2\2`^\3\2\2\2ab\7\3\2\2bt\5N(\2ce\7\4")
         buf.write("\2\2df\7\5\2\2ed\3\2\2\2ef\3\2\2\2fg\3\2\2\2go\5N(\2h")
         buf.write("j\7\6\2\2ik\7\5\2\2ji\3\2\2\2jk\3\2\2\2kl\3\2\2\2ln\7")
-        buf.write("Y\2\2mh\3\2\2\2nq\3\2\2\2om\3\2\2\2op\3\2\2\2pr\3\2\2")
+        buf.write("X\2\2mh\3\2\2\2nq\3\2\2\2om\3\2\2\2op\3\2\2\2pr\3\2\2")
         buf.write("\2qo\3\2\2\2rs\7\7\2\2su\3\2\2\2tc\3\2\2\2tu\3\2\2\2u")
         buf.write("\5\3\2\2\2vx\7\b\2\2wv\3\2\2\2wx\3\2\2\2xy\3\2\2\2yz\7")
         buf.write("\t\2\2z\u0086\5N(\2{|\7\4\2\2|\u0081\5P)\2}~\7\6\2\2~")
@@ -174,10 +174,10 @@ def serializedATN():
         buf.write("\u0125\u0128\t\2\2\2\u0126\u0129\5N(\2\u0127\u0129\5J")
         buf.write("&\2\u0128\u0126\3\2\2\2\u0128\u0127\3\2\2\2\u0129\u012a")
         buf.write("\3\2\2\2\u012a\u012b\5\22\n\2\u012b\21\3\2\2\2\u012c\u012d")
-        buf.write("\7\25\2\2\u012d\u0130\7Y\2\2\u012e\u012f\7\26\2\2\u012f")
+        buf.write("\7\25\2\2\u012d\u0130\7X\2\2\u012e\u012f\7\26\2\2\u012f")
         buf.write("\u0131\t\3\2\2\u0130\u012e\3\2\2\2\u0130\u0131\3\2\2\2")
         buf.write("\u0131\u0153\3\2\2\2\u0132\u0133\7\25\2\2\u0133\u0134")
-        buf.write("\7Y\2\2\u0134\u0135\7\31\2\2\u0135\u013a\5\24\13\2\u0136")
+        buf.write("\7X\2\2\u0134\u0135\7\31\2\2\u0135\u013a\5\24\13\2\u0136")
         buf.write("\u0137\7\6\2\2\u0137\u0139\5\24\13\2\u0138\u0136\3\2\2")
         buf.write("\2\u0139\u013c\3\2\2\2\u013a\u0138\3\2\2\2\u013a\u013b")
         buf.write("\3\2\2\2\u013b\u013f\3\2\2\2\u013c\u013a\3\2\2\2\u013d")
@@ -193,7 +193,7 @@ def serializedATN():
         buf.write("\u0153\3\2\2\2\u0152\u012c\3\2\2\2\u0152\u0132\3\2\2\2")
         buf.write("\u0152\u0141\3\2\2\2\u0152\u0150\3\2\2\2\u0153\23\3\2")
         buf.write("\2\2\u0154\u0156\7\5\2\2\u0155\u0154\3\2\2\2\u0155\u0156")
-        buf.write("\3\2\2\2\u0156\u0157\3\2\2\2\u0157\u015b\7Y\2\2\u0158")
+        buf.write("\3\2\2\2\u0156\u0157\3\2\2\2\u0157\u015b\7X\2\2\u0158")
         buf.write("\u015c\5N(\2\u0159\u015c\7\32\2\2\u015a\u015c\7\33\2\2")
         buf.write("\u015b\u0158\3\2\2\2\u015b\u0159\3\2\2\2\u015b\u015a\3")
         buf.write("\2\2\2\u015c\25\3\2\2\2\u015d\u015f\5\32\16\2\u015e\u015d")
@@ -278,55 +278,55 @@ def serializedATN():
         buf.write("\u0211\3\2\2\2\u021f\u0222\3\2\2\2\u0220\u021e\3\2\2\2")
         buf.write("\u0220\u0221\3\2\2\2\u02219\3\2\2\2\u0222\u0220\3\2\2")
         buf.write("\2\u0223\u0224\5<\37\2\u0224\u0225\5:\36\2\u0225\u0240")
-        buf.write("\3\2\2\2\u0226\u0240\7Y\2\2\u0227\u0228\7>\2\2\u0228\u0240")
-        buf.write("\7Y\2\2\u0229\u0240\7F\2\2\u022a\u0240\7K\2\2\u022b\u0240")
-        buf.write("\7L\2\2\u022c\u0240\7M\2\2\u022d\u0240\7N\2\2\u022e\u0230")
-        buf.write("\7O\2\2\u022f\u022e\3\2\2\2\u022f\u0230\3\2\2\2\u0230")
-        buf.write("\u0231\3\2\2\2\u0231\u0240\5N(\2\u0232\u0240\5J&\2\u0233")
-        buf.write("\u0234\7\35\2\2\u0234\u0239\5@!\2\u0235\u0236\7\6\2\2")
-        buf.write("\u0236\u0238\5@!\2\u0237\u0235\3\2\2\2\u0238\u023b\3\2")
-        buf.write("\2\2\u0239\u0237\3\2\2\2\u0239\u023a\3\2\2\2\u023a\u023c")
-        buf.write("\3\2\2\2\u023b\u0239\3\2\2\2\u023c\u023d\5L\'\2\u023d")
-        buf.write("\u023e\7\36\2\2\u023e\u0240\3\2\2\2\u023f\u0223\3\2\2")
-        buf.write("\2\u023f\u0226\3\2\2\2\u023f\u0227\3\2\2\2\u023f\u0229")
-        buf.write("\3\2\2\2\u023f\u022a\3\2\2\2\u023f\u022b\3\2\2\2\u023f")
-        buf.write("\u022c\3\2\2\2\u023f\u022d\3\2\2\2\u023f\u022f\3\2\2\2")
-        buf.write("\u023f\u0232\3\2\2\2\u023f\u0233\3\2\2\2\u0240;\3\2\2")
-        buf.write("\2\u0241\u0242\t\r\2\2\u0242=\3\2\2\2\u0243\u0246\5B\"")
-        buf.write("\2\u0244\u0246\5@!\2\u0245\u0243\3\2\2\2\u0245\u0244\3")
-        buf.write("\2\2\2\u0246?\3\2\2\2\u0247\u0249\7\b\2\2\u0248\u0247")
+        buf.write("\3\2\2\2\u0226\u0240\7X\2\2\u0227\u0228\7>\2\2\u0228\u0240")
+        buf.write("\7X\2\2\u0229\u0240\7F\2\2\u022a\u0240\7K\2\2\u022b\u0240")
+        buf.write("\7L\2\2\u022c\u0240\7\32\2\2\u022d\u0240\7M\2\2\u022e")
+        buf.write("\u0230\7N\2\2\u022f\u022e\3\2\2\2\u022f\u0230\3\2\2\2")
+        buf.write("\u0230\u0231\3\2\2\2\u0231\u0240\5N(\2\u0232\u0240\5J")
+        buf.write("&\2\u0233\u0234\7\35\2\2\u0234\u0239\5@!\2\u0235\u0236")
+        buf.write("\7\6\2\2\u0236\u0238\5@!\2\u0237\u0235\3\2\2\2\u0238\u023b")
+        buf.write("\3\2\2\2\u0239\u0237\3\2\2\2\u0239\u023a\3\2\2\2\u023a")
+        buf.write("\u023c\3\2\2\2\u023b\u0239\3\2\2\2\u023c\u023d\5L\'\2")
+        buf.write("\u023d\u023e\7\36\2\2\u023e\u0240\3\2\2\2\u023f\u0223")
+        buf.write("\3\2\2\2\u023f\u0226\3\2\2\2\u023f\u0227\3\2\2\2\u023f")
+        buf.write("\u0229\3\2\2\2\u023f\u022a\3\2\2\2\u023f\u022b\3\2\2\2")
+        buf.write("\u023f\u022c\3\2\2\2\u023f\u022d\3\2\2\2\u023f\u022f\3")
+        buf.write("\2\2\2\u023f\u0232\3\2\2\2\u023f\u0233\3\2\2\2\u0240;")
+        buf.write("\3\2\2\2\u0241\u0242\t\r\2\2\u0242=\3\2\2\2\u0243\u0246")
+        buf.write("\5B\"\2\u0244\u0246\5@!\2\u0245\u0243\3\2\2\2\u0245\u0244")
+        buf.write("\3\2\2\2\u0246?\3\2\2\2\u0247\u0249\7\b\2\2\u0248\u0247")
         buf.write("\3\2\2\2\u0248\u0249\3\2\2\2\u0249\u024b\3\2\2\2\u024a")
-        buf.write("\u024c\7S\2\2\u024b\u024a\3\2\2\2\u024b\u024c\3\2\2\2")
+        buf.write("\u024c\7R\2\2\u024b\u024a\3\2\2\2\u024b\u024c\3\2\2\2")
         buf.write("\u024c\u024d\3\2\2\2\u024d\u0252\5N(\2\u024e\u024f\7\6")
         buf.write("\2\2\u024f\u0251\5N(\2\u0250\u024e\3\2\2\2\u0251\u0254")
         buf.write("\3\2\2\2\u0252\u0250\3\2\2\2\u0252\u0253\3\2\2\2\u0253")
         buf.write("\u0255\3\2\2\2\u0254\u0252\3\2\2\2\u0255\u0257\7\21\2")
-        buf.write("\2\u0256\u0258\7S\2\2\u0257\u0256\3\2\2\2\u0257\u0258")
+        buf.write("\2\u0256\u0258\7R\2\2\u0257\u0256\3\2\2\2\u0257\u0258")
         buf.write("\3\2\2\2\u0258\u0259\3\2\2\2\u0259\u025a\5\36\20\2\u025a")
         buf.write("A\3\2\2\2\u025b\u025d\7\b\2\2\u025c\u025b\3\2\2\2\u025c")
-        buf.write("\u025d\3\2\2\2\u025d\u025f\3\2\2\2\u025e\u0260\7S\2\2")
+        buf.write("\u025d\3\2\2\2\u025d\u025f\3\2\2\2\u025e\u0260\7R\2\2")
         buf.write("\u025f\u025e\3\2\2\2\u025f\u0260\3\2\2\2\u0260\u0261\3")
         buf.write("\2\2\2\u0261\u0266\5N(\2\u0262\u0263\7\6\2\2\u0263\u0265")
         buf.write("\5N(\2\u0264\u0262\3\2\2\2\u0265\u0268\3\2\2\2\u0266\u0264")
         buf.write("\3\2\2\2\u0266\u0267\3\2\2\2\u0267\u0269\3\2\2\2\u0268")
-        buf.write("\u0266\3\2\2\2\u0269\u026a\7\21\2\2\u026a\u026b\7T\2\2")
+        buf.write("\u0266\3\2\2\2\u0269\u026a\7\21\2\2\u026a\u026b\7S\2\2")
         buf.write("\u026b\u026c\5\36\20\2\u026cC\3\2\2\2\u026d\u026e\5N(")
         buf.write("\2\u026e\u026f\7\66\2\2\u026f\u0270\5\36\20\2\u0270E\3")
         buf.write("\2\2\2\u0271\u0272\t\16\2\2\u0272G\3\2\2\2\u0273\u0275")
         buf.write("\t\17\2\2\u0274\u0273\3\2\2\2\u0274\u0275\3\2\2\2\u0275")
-        buf.write("\u0276\3\2\2\2\u0276\u0278\7U\2\2\u0277\u0279\t\17\2\2")
+        buf.write("\u0276\3\2\2\2\u0276\u0278\7T\2\2\u0277\u0279\t\17\2\2")
         buf.write("\u0278\u0277\3\2\2\2\u0278\u0279\3\2\2\2\u0279I\3\2\2")
         buf.write("\2\u027a\u027e\7\35\2\2\u027b\u027d\5\36\20\2\u027c\u027b")
         buf.write("\3\2\2\2\u027d\u0280\3\2\2\2\u027e\u027c\3\2\2\2\u027e")
         buf.write("\u027f\3\2\2\2\u027f\u0281\3\2\2\2\u0280\u027e\3\2\2\2")
         buf.write("\u0281\u0282\7\36\2\2\u0282K\3\2\2\2\u0283\u0287\5J&\2")
-        buf.write("\u0284\u0285\7V\2\2\u0285\u0287\5\36\20\2\u0286\u0283")
+        buf.write("\u0284\u0285\7U\2\2\u0285\u0287\5\36\20\2\u0286\u0283")
         buf.write("\3\2\2\2\u0286\u0284\3\2\2\2\u0287M\3\2\2\2\u0288\u028d")
-        buf.write("\t\20\2\2\u0289\u028a\7X\2\2\u028a\u028c\7Z\2\2\u028b")
+        buf.write("\t\20\2\2\u0289\u028a\7W\2\2\u028a\u028c\7Y\2\2\u028b")
         buf.write("\u0289\3\2\2\2\u028c\u028f\3\2\2\2\u028d\u028b\3\2\2\2")
         buf.write("\u028d\u028e\3\2\2\2\u028eO\3\2\2\2\u028f\u028d\3\2\2")
         buf.write("\2\u0290\u0295\5N(\2\u0291\u0295\7L\2\2\u0292\u0295\7")
-        buf.write("M\2\2\u0293\u0295\7N\2\2\u0294\u0290\3\2\2\2\u0294\u0291")
+        buf.write("\32\2\2\u0293\u0295\7M\2\2\u0294\u0290\3\2\2\2\u0294\u0291")
         buf.write("\3\2\2\2\u0294\u0292\3\2\2\2\u0294\u0293\3\2\2\2\u0295")
         buf.write("Q\3\2\2\2[SX^ejotw\u0081\u0086\u008a\u0092\u0096\u009c")
         buf.write("\u00a1\u00a7\u00b0\u00b3\u00bb\u00c1\u00ca\u00cd\u00d5")
@@ -355,7 +355,7 @@ class FAlloyParser ( Parser ):
                      "']'", "'private'", "'open'", "'as'", "'fact'", "'assert'", 
                      "'fun'", "'.'", "'('", "')'", "':'", "'pred'", "'run'", 
                      "'check'", "'for'", "'expect'", "'0'", "'1'", "'but'", 
-                     "'int'", "'seq'", "'sig'", "'{'", "'}'", "'enum'", 
+                     "'Int'", "'seq'", "'sig'", "'{'", "'}'", "'enum'", 
                      "'abstract'", "'lone'", "'one'", "'some'", "'extends'", 
                      "'in'", "'+'", "'let'", "'all'", "'no'", "'sum'", "'=>'", 
                      "'implies'", "'else'", "'||'", "'or'", "'&&'", "'and'", 
@@ -363,9 +363,8 @@ class FAlloyParser ( Parser ):
                      "'=<'", "'>='", "'set'", "'#'", "'&'", "'-'", "'++'", 
                      "'<:'", "':>'", "'<<'", "'>>'", "'>>>'", "'is'", "'none'", 
                      "'slightly'", "'half'", "'mostly'", "'fully'", "'iden'", 
-                     "'univ'", "'Int'", "'seq/Int'", "'@'", "'~'", "'*'", 
-                     "'^'", "'disj'", "'fuzzy'", "'->'", "'|'", "'this'", 
-                     "'/'" ]
+                     "'univ'", "'seq/Int'", "'@'", "'~'", "'*'", "'^'", 
+                     "'disj'", "'fuzzy'", "'->'", "'|'", "'this'", "'/'" ]
 
     symbolicNames = [ "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
                       "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
@@ -388,7 +387,8 @@ class FAlloyParser ( Parser ):
                       "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
                       "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
                       "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
-                      "<INVALID>", "<INVALID>", "<INVALID>", "NUMBER", "ID" ]
+                      "<INVALID>", "<INVALID>", "NUMBER", "ID", "COMMENT", 
+                      "LINE_COMMENT" ]
 
     RULE_specification = 0
     RULE_module = 1
@@ -526,9 +526,10 @@ class FAlloyParser ( Parser ):
     T__82=83
     T__83=84
     T__84=85
-    T__85=86
-    NUMBER=87
-    ID=88
+    NUMBER=86
+    ID=87
+    COMMENT=88
+    LINE_COMMENT=89
 
     def __init__(self, input:TokenStream, output:TextIO = sys.stdout):
         super().__init__(input, output)
@@ -605,7 +606,7 @@ class FAlloyParser ( Parser ):
             self.state = 92
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            while (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << FAlloyParser.T__5) | (1 << FAlloyParser.T__8) | (1 << FAlloyParser.T__9) | (1 << FAlloyParser.T__10) | (1 << FAlloyParser.T__15) | (1 << FAlloyParser.T__16) | (1 << FAlloyParser.T__17) | (1 << FAlloyParser.T__25) | (1 << FAlloyParser.T__28) | (1 << FAlloyParser.T__29) | (1 << FAlloyParser.T__30) | (1 << FAlloyParser.T__31) | (1 << FAlloyParser.T__32))) != 0) or _la==FAlloyParser.T__84 or _la==FAlloyParser.ID:
+            while (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << FAlloyParser.T__5) | (1 << FAlloyParser.T__8) | (1 << FAlloyParser.T__9) | (1 << FAlloyParser.T__10) | (1 << FAlloyParser.T__15) | (1 << FAlloyParser.T__16) | (1 << FAlloyParser.T__17) | (1 << FAlloyParser.T__25) | (1 << FAlloyParser.T__28) | (1 << FAlloyParser.T__29) | (1 << FAlloyParser.T__30) | (1 << FAlloyParser.T__31) | (1 << FAlloyParser.T__32))) != 0) or _la==FAlloyParser.T__83 or _la==FAlloyParser.ID:
                 self.state = 89
                 self.paragraph()
                 self.state = 94
@@ -945,7 +946,7 @@ class FAlloyParser ( Parser ):
             self.state = 148
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            if _la==FAlloyParser.T__84 or _la==FAlloyParser.ID:
+            if _la==FAlloyParser.T__83 or _la==FAlloyParser.ID:
                 self.state = 147
                 self.name()
 
@@ -1000,7 +1001,7 @@ class FAlloyParser ( Parser ):
             self.state = 154
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            if _la==FAlloyParser.T__84 or _la==FAlloyParser.ID:
+            if _la==FAlloyParser.T__83 or _la==FAlloyParser.ID:
                 self.state = 153
                 self.name()
 
@@ -1096,7 +1097,7 @@ class FAlloyParser ( Parser ):
                 self.state = 177
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
-                if _la==FAlloyParser.T__5 or ((((_la - 81)) & ~0x3f) == 0 and ((1 << (_la - 81)) & ((1 << (FAlloyParser.T__80 - 81)) | (1 << (FAlloyParser.T__84 - 81)) | (1 << (FAlloyParser.ID - 81)))) != 0):
+                if _la==FAlloyParser.T__5 or ((((_la - 80)) & ~0x3f) == 0 and ((1 << (_la - 80)) & ((1 << (FAlloyParser.T__79 - 80)) | (1 << (FAlloyParser.T__83 - 80)) | (1 << (FAlloyParser.ID - 80)))) != 0):
                     self.state = 169
                     self.decl()
                     self.state = 174
@@ -1152,7 +1153,7 @@ class FAlloyParser ( Parser ):
                 self.state = 203
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
-                if _la==FAlloyParser.T__5 or ((((_la - 81)) & ~0x3f) == 0 and ((1 << (_la - 81)) & ((1 << (FAlloyParser.T__80 - 81)) | (1 << (FAlloyParser.T__84 - 81)) | (1 << (FAlloyParser.ID - 81)))) != 0):
+                if _la==FAlloyParser.T__5 or ((((_la - 80)) & ~0x3f) == 0 and ((1 << (_la - 80)) & ((1 << (FAlloyParser.T__79 - 80)) | (1 << (FAlloyParser.T__83 - 80)) | (1 << (FAlloyParser.ID - 80)))) != 0):
                     self.state = 195
                     self.decl()
                     self.state = 200
@@ -1240,7 +1241,7 @@ class FAlloyParser ( Parser ):
                 self.state = 243
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
-                if _la==FAlloyParser.T__5 or ((((_la - 81)) & ~0x3f) == 0 and ((1 << (_la - 81)) & ((1 << (FAlloyParser.T__80 - 81)) | (1 << (FAlloyParser.T__84 - 81)) | (1 << (FAlloyParser.ID - 81)))) != 0):
+                if _la==FAlloyParser.T__5 or ((((_la - 80)) & ~0x3f) == 0 and ((1 << (_la - 80)) & ((1 << (FAlloyParser.T__79 - 80)) | (1 << (FAlloyParser.T__83 - 80)) | (1 << (FAlloyParser.ID - 80)))) != 0):
                     self.state = 235
                     self.decl()
                     self.state = 240
@@ -1292,7 +1293,7 @@ class FAlloyParser ( Parser ):
                 self.state = 267
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
-                if _la==FAlloyParser.T__5 or ((((_la - 81)) & ~0x3f) == 0 and ((1 << (_la - 81)) & ((1 << (FAlloyParser.T__80 - 81)) | (1 << (FAlloyParser.T__84 - 81)) | (1 << (FAlloyParser.ID - 81)))) != 0):
+                if _la==FAlloyParser.T__5 or ((((_la - 80)) & ~0x3f) == 0 and ((1 << (_la - 80)) & ((1 << (FAlloyParser.T__79 - 80)) | (1 << (FAlloyParser.T__83 - 80)) | (1 << (FAlloyParser.ID - 80)))) != 0):
                     self.state = 259
                     self.decl()
                     self.state = 264
@@ -1397,7 +1398,7 @@ class FAlloyParser ( Parser ):
             self.state = 289
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            if _la==FAlloyParser.T__84 or _la==FAlloyParser.ID:
+            if _la==FAlloyParser.T__83 or _la==FAlloyParser.ID:
                 self.state = 286
                 self.name()
                 self.state = 287
@@ -1414,7 +1415,7 @@ class FAlloyParser ( Parser ):
             self.state = 294
             self._errHandler.sync(self)
             token = self._input.LA(1)
-            if token in [FAlloyParser.T__84, FAlloyParser.ID]:
+            if token in [FAlloyParser.T__83, FAlloyParser.ID]:
                 self.state = 292
                 self.name()
                 pass
@@ -1648,7 +1649,7 @@ class FAlloyParser ( Parser ):
             self.state = 345
             self._errHandler.sync(self)
             token = self._input.LA(1)
-            if token in [FAlloyParser.T__84, FAlloyParser.ID]:
+            if token in [FAlloyParser.T__83, FAlloyParser.ID]:
                 self.state = 342
                 self.name()
                 pass
@@ -1767,7 +1768,7 @@ class FAlloyParser ( Parser ):
             self.state = 374
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            if _la==FAlloyParser.T__5 or ((((_la - 81)) & ~0x3f) == 0 and ((1 << (_la - 81)) & ((1 << (FAlloyParser.T__80 - 81)) | (1 << (FAlloyParser.T__84 - 81)) | (1 << (FAlloyParser.ID - 81)))) != 0):
+            if _la==FAlloyParser.T__5 or ((((_la - 80)) & ~0x3f) == 0 and ((1 << (_la - 80)) & ((1 << (FAlloyParser.T__79 - 80)) | (1 << (FAlloyParser.T__83 - 80)) | (1 << (FAlloyParser.ID - 80)))) != 0):
                 self.state = 366
                 self.declOrFuzzyDecl()
                 self.state = 371
@@ -2236,7 +2237,7 @@ class FAlloyParser ( Parser ):
                 self.state = 440
                 self.match(FAlloyParser.T__13)
                 pass
-            elif token in [FAlloyParser.T__24, FAlloyParser.T__26, FAlloyParser.T__30, FAlloyParser.T__31, FAlloyParser.T__32, FAlloyParser.T__38, FAlloyParser.T__49, FAlloyParser.T__50, FAlloyParser.T__56, FAlloyParser.T__57, FAlloyParser.T__59, FAlloyParser.T__67, FAlloyParser.T__72, FAlloyParser.T__73, FAlloyParser.T__74, FAlloyParser.T__75, FAlloyParser.T__76, FAlloyParser.T__77, FAlloyParser.T__78, FAlloyParser.T__79, FAlloyParser.T__84, FAlloyParser.NUMBER, FAlloyParser.ID]:
+            elif token in [FAlloyParser.T__23, FAlloyParser.T__24, FAlloyParser.T__26, FAlloyParser.T__30, FAlloyParser.T__31, FAlloyParser.T__32, FAlloyParser.T__38, FAlloyParser.T__49, FAlloyParser.T__50, FAlloyParser.T__56, FAlloyParser.T__57, FAlloyParser.T__59, FAlloyParser.T__67, FAlloyParser.T__72, FAlloyParser.T__73, FAlloyParser.T__74, FAlloyParser.T__75, FAlloyParser.T__76, FAlloyParser.T__77, FAlloyParser.T__78, FAlloyParser.T__83, FAlloyParser.NUMBER, FAlloyParser.ID]:
                 self.state = 442
                 self.lCExpr(0)
                 pass
@@ -2403,7 +2404,7 @@ class FAlloyParser ( Parser ):
                 self.state = 464
                 self.lCExpr(2)
                 pass
-            elif token in [FAlloyParser.T__26, FAlloyParser.T__59, FAlloyParser.T__67, FAlloyParser.T__72, FAlloyParser.T__73, FAlloyParser.T__74, FAlloyParser.T__75, FAlloyParser.T__76, FAlloyParser.T__77, FAlloyParser.T__78, FAlloyParser.T__79, FAlloyParser.T__84, FAlloyParser.NUMBER, FAlloyParser.ID]:
+            elif token in [FAlloyParser.T__23, FAlloyParser.T__26, FAlloyParser.T__59, FAlloyParser.T__67, FAlloyParser.T__72, FAlloyParser.T__73, FAlloyParser.T__74, FAlloyParser.T__75, FAlloyParser.T__76, FAlloyParser.T__77, FAlloyParser.T__78, FAlloyParser.T__83, FAlloyParser.NUMBER, FAlloyParser.ID]:
                 self.state = 466
                 self.binLogicExpr(0)
                 pass
@@ -2936,7 +2937,7 @@ class FAlloyParser ( Parser ):
                         self.state = 537
                         self._errHandler.sync(self)
                         _la = self._input.LA(1)
-                        if (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << FAlloyParser.T__12) | (1 << FAlloyParser.T__24) | (1 << FAlloyParser.T__26) | (1 << FAlloyParser.T__30) | (1 << FAlloyParser.T__31) | (1 << FAlloyParser.T__32) | (1 << FAlloyParser.T__36) | (1 << FAlloyParser.T__37) | (1 << FAlloyParser.T__38) | (1 << FAlloyParser.T__39) | (1 << FAlloyParser.T__49) | (1 << FAlloyParser.T__50) | (1 << FAlloyParser.T__56) | (1 << FAlloyParser.T__57) | (1 << FAlloyParser.T__59))) != 0) or ((((_la - 68)) & ~0x3f) == 0 and ((1 << (_la - 68)) & ((1 << (FAlloyParser.T__67 - 68)) | (1 << (FAlloyParser.T__72 - 68)) | (1 << (FAlloyParser.T__73 - 68)) | (1 << (FAlloyParser.T__74 - 68)) | (1 << (FAlloyParser.T__75 - 68)) | (1 << (FAlloyParser.T__76 - 68)) | (1 << (FAlloyParser.T__77 - 68)) | (1 << (FAlloyParser.T__78 - 68)) | (1 << (FAlloyParser.T__79 - 68)) | (1 << (FAlloyParser.T__84 - 68)) | (1 << (FAlloyParser.NUMBER - 68)) | (1 << (FAlloyParser.ID - 68)))) != 0):
+                        if (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << FAlloyParser.T__12) | (1 << FAlloyParser.T__23) | (1 << FAlloyParser.T__24) | (1 << FAlloyParser.T__26) | (1 << FAlloyParser.T__30) | (1 << FAlloyParser.T__31) | (1 << FAlloyParser.T__32) | (1 << FAlloyParser.T__36) | (1 << FAlloyParser.T__37) | (1 << FAlloyParser.T__38) | (1 << FAlloyParser.T__39) | (1 << FAlloyParser.T__49) | (1 << FAlloyParser.T__50) | (1 << FAlloyParser.T__56) | (1 << FAlloyParser.T__57) | (1 << FAlloyParser.T__59))) != 0) or ((((_la - 68)) & ~0x3f) == 0 and ((1 << (_la - 68)) & ((1 << (FAlloyParser.T__67 - 68)) | (1 << (FAlloyParser.T__72 - 68)) | (1 << (FAlloyParser.T__73 - 68)) | (1 << (FAlloyParser.T__74 - 68)) | (1 << (FAlloyParser.T__75 - 68)) | (1 << (FAlloyParser.T__76 - 68)) | (1 << (FAlloyParser.T__77 - 68)) | (1 << (FAlloyParser.T__78 - 68)) | (1 << (FAlloyParser.T__83 - 68)) | (1 << (FAlloyParser.NUMBER - 68)) | (1 << (FAlloyParser.ID - 68)))) != 0):
                             self.state = 529
                             self.rootExpr()
                             self.state = 534
@@ -3072,13 +3073,13 @@ class FAlloyParser ( Parser ):
             elif la_ == 7:
                 self.enterOuterAlt(localctx, 7)
                 self.state = 554
-                self.match(FAlloyParser.T__74)
+                self.match(FAlloyParser.T__23)
                 pass
 
             elif la_ == 8:
                 self.enterOuterAlt(localctx, 8)
                 self.state = 555
-                self.match(FAlloyParser.T__75)
+                self.match(FAlloyParser.T__74)
                 pass
 
             elif la_ == 9:
@@ -3086,9 +3087,9 @@ class FAlloyParser ( Parser ):
                 self.state = 557
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
-                if _la==FAlloyParser.T__76:
+                if _la==FAlloyParser.T__75:
                     self.state = 556
-                    self.match(FAlloyParser.T__76)
+                    self.match(FAlloyParser.T__75)
 
 
                 self.state = 559
@@ -3165,7 +3166,7 @@ class FAlloyParser ( Parser ):
             self.enterOuterAlt(localctx, 1)
             self.state = 575
             _la = self._input.LA(1)
-            if not(((((_la - 78)) & ~0x3f) == 0 and ((1 << (_la - 78)) & ((1 << (FAlloyParser.T__77 - 78)) | (1 << (FAlloyParser.T__78 - 78)) | (1 << (FAlloyParser.T__79 - 78)))) != 0)):
+            if not(((((_la - 77)) & ~0x3f) == 0 and ((1 << (_la - 77)) & ((1 << (FAlloyParser.T__76 - 77)) | (1 << (FAlloyParser.T__77 - 77)) | (1 << (FAlloyParser.T__78 - 77)))) != 0)):
                 self._errHandler.recoverInline(self)
             else:
                 self._errHandler.reportMatch(self)
@@ -3284,9 +3285,9 @@ class FAlloyParser ( Parser ):
             self.state = 585
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            if _la==FAlloyParser.T__80:
+            if _la==FAlloyParser.T__79:
                 self.state = 584
-                self.match(FAlloyParser.T__80)
+                self.match(FAlloyParser.T__79)
 
 
             self.state = 587
@@ -3308,9 +3309,9 @@ class FAlloyParser ( Parser ):
             self.state = 597
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            if _la==FAlloyParser.T__80:
+            if _la==FAlloyParser.T__79:
                 self.state = 596
-                self.match(FAlloyParser.T__80)
+                self.match(FAlloyParser.T__79)
 
 
             self.state = 599
@@ -3372,9 +3373,9 @@ class FAlloyParser ( Parser ):
             self.state = 605
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            if _la==FAlloyParser.T__80:
+            if _la==FAlloyParser.T__79:
                 self.state = 604
-                self.match(FAlloyParser.T__80)
+                self.match(FAlloyParser.T__79)
 
 
             self.state = 607
@@ -3394,7 +3395,7 @@ class FAlloyParser ( Parser ):
             self.state = 615
             self.match(FAlloyParser.T__14)
             self.state = 616
-            self.match(FAlloyParser.T__81)
+            self.match(FAlloyParser.T__80)
             self.state = 617
             self.rootExpr()
         except RecognitionException as re:
@@ -3538,7 +3539,7 @@ class FAlloyParser ( Parser ):
 
 
             self.state = 628
-            self.match(FAlloyParser.T__82)
+            self.match(FAlloyParser.T__81)
             self.state = 630
             self._errHandler.sync(self)
             _la = self._input.LA(1)
@@ -3599,7 +3600,7 @@ class FAlloyParser ( Parser ):
             self.state = 636
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            while (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << FAlloyParser.T__12) | (1 << FAlloyParser.T__24) | (1 << FAlloyParser.T__26) | (1 << FAlloyParser.T__30) | (1 << FAlloyParser.T__31) | (1 << FAlloyParser.T__32) | (1 << FAlloyParser.T__36) | (1 << FAlloyParser.T__37) | (1 << FAlloyParser.T__38) | (1 << FAlloyParser.T__39) | (1 << FAlloyParser.T__49) | (1 << FAlloyParser.T__50) | (1 << FAlloyParser.T__56) | (1 << FAlloyParser.T__57) | (1 << FAlloyParser.T__59))) != 0) or ((((_la - 68)) & ~0x3f) == 0 and ((1 << (_la - 68)) & ((1 << (FAlloyParser.T__67 - 68)) | (1 << (FAlloyParser.T__72 - 68)) | (1 << (FAlloyParser.T__73 - 68)) | (1 << (FAlloyParser.T__74 - 68)) | (1 << (FAlloyParser.T__75 - 68)) | (1 << (FAlloyParser.T__76 - 68)) | (1 << (FAlloyParser.T__77 - 68)) | (1 << (FAlloyParser.T__78 - 68)) | (1 << (FAlloyParser.T__79 - 68)) | (1 << (FAlloyParser.T__84 - 68)) | (1 << (FAlloyParser.NUMBER - 68)) | (1 << (FAlloyParser.ID - 68)))) != 0):
+            while (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << FAlloyParser.T__12) | (1 << FAlloyParser.T__23) | (1 << FAlloyParser.T__24) | (1 << FAlloyParser.T__26) | (1 << FAlloyParser.T__30) | (1 << FAlloyParser.T__31) | (1 << FAlloyParser.T__32) | (1 << FAlloyParser.T__36) | (1 << FAlloyParser.T__37) | (1 << FAlloyParser.T__38) | (1 << FAlloyParser.T__39) | (1 << FAlloyParser.T__49) | (1 << FAlloyParser.T__50) | (1 << FAlloyParser.T__56) | (1 << FAlloyParser.T__57) | (1 << FAlloyParser.T__59))) != 0) or ((((_la - 68)) & ~0x3f) == 0 and ((1 << (_la - 68)) & ((1 << (FAlloyParser.T__67 - 68)) | (1 << (FAlloyParser.T__72 - 68)) | (1 << (FAlloyParser.T__73 - 68)) | (1 << (FAlloyParser.T__74 - 68)) | (1 << (FAlloyParser.T__75 - 68)) | (1 << (FAlloyParser.T__76 - 68)) | (1 << (FAlloyParser.T__77 - 68)) | (1 << (FAlloyParser.T__78 - 68)) | (1 << (FAlloyParser.T__83 - 68)) | (1 << (FAlloyParser.NUMBER - 68)) | (1 << (FAlloyParser.ID - 68)))) != 0):
                 self.state = 633
                 self.rootExpr()
                 self.state = 638
@@ -3657,10 +3658,10 @@ class FAlloyParser ( Parser ):
                 self.state = 641
                 self.block()
                 pass
-            elif token in [FAlloyParser.T__83]:
+            elif token in [FAlloyParser.T__82]:
                 self.enterOuterAlt(localctx, 2)
                 self.state = 642
-                self.match(FAlloyParser.T__83)
+                self.match(FAlloyParser.T__82)
                 self.state = 643
                 self.rootExpr()
                 pass
@@ -3710,7 +3711,7 @@ class FAlloyParser ( Parser ):
             self.enterOuterAlt(localctx, 1)
             self.state = 646
             _la = self._input.LA(1)
-            if not(_la==FAlloyParser.T__84 or _la==FAlloyParser.ID):
+            if not(_la==FAlloyParser.T__83 or _la==FAlloyParser.ID):
                 self._errHandler.recoverInline(self)
             else:
                 self._errHandler.reportMatch(self)
@@ -3721,7 +3722,7 @@ class FAlloyParser ( Parser ):
             while _alt!=2 and _alt!=ATN.INVALID_ALT_NUMBER:
                 if _alt==1:
                     self.state = 647
-                    self.match(FAlloyParser.T__85)
+                    self.match(FAlloyParser.T__84)
                     self.state = 648
                     self.match(FAlloyParser.ID) 
                 self.state = 653
@@ -3768,7 +3769,7 @@ class FAlloyParser ( Parser ):
             self.state = 658
             self._errHandler.sync(self)
             token = self._input.LA(1)
-            if token in [FAlloyParser.T__84, FAlloyParser.ID]:
+            if token in [FAlloyParser.T__83, FAlloyParser.ID]:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 654
                 self.name()
@@ -3778,15 +3779,15 @@ class FAlloyParser ( Parser ):
                 self.state = 655
                 self.match(FAlloyParser.T__73)
                 pass
-            elif token in [FAlloyParser.T__74]:
+            elif token in [FAlloyParser.T__23]:
                 self.enterOuterAlt(localctx, 3)
                 self.state = 656
-                self.match(FAlloyParser.T__74)
+                self.match(FAlloyParser.T__23)
                 pass
-            elif token in [FAlloyParser.T__75]:
+            elif token in [FAlloyParser.T__74]:
                 self.enterOuterAlt(localctx, 4)
                 self.state = 657
-                self.match(FAlloyParser.T__75)
+                self.match(FAlloyParser.T__74)
                 pass
             else:
                 raise NoViableAltException(self)

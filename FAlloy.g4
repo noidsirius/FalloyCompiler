@@ -26,7 +26,7 @@ scope : 'for' NUMBER                   ('expect' ('0'|'1'))?
       | 'for'              (typescope (',' typescope)*) ('expect' ('0'|'1'))?
       |                                ('expect' ('0'|'1'))?;
 
-typescope : ('exactly')? NUMBER (name|'int'|'seq');
+typescope : ('exactly')? NUMBER (name|'Int'|'seq');
 
 sigDecl : sigQual* 'sig' (name (',' name)*) sigExt? '{' (declOrFuzzyDecl (',' declOrFuzzyDecl)*)? '}' block?;
 
@@ -99,5 +99,9 @@ name : ('this' | ID) ('/' ID)*;
 NUMBER: [0-9]+;
 ID: [a-zA-Z_][a-zA-Z_0-9]*;
 //number : '0' | '1' | '2' | '3' | '4' ;
+
+COMMENT:   '/*' .*? '*/' -> skip;
+
+LINE_COMMENT:   '//' ~[\r\n]* -> skip;
 
 ref : name | 'univ' | 'Int' | 'seq/Int';

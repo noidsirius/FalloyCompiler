@@ -31,13 +31,13 @@ def to_string(parser_node):
 def is_fuzzy_relation(parser_node):
     return hasattr(parser_node, "IS_FUZZY_REL") or to_string(parser_node).strip().split(' ')[-1] in fuzzy_relations
 
+
 class FAlloyPrintListener(FAlloyListener):
-    def enterEveryRule(self, ctx:ParserRuleContext):
+    def enterEveryRule(self, ctx: ParserRuleContext):
         if phase == 2:
             if hasattr(ctx, "SKIP_PRINT"):
                 for child in ctx.children:
                     child.SKIP_PRINT = True
-
 
     def exitSpecification(self, ctx: FAlloyParser.SpecificationContext):
         if phase == 3:
@@ -47,12 +47,16 @@ class FAlloyPrintListener(FAlloyListener):
         if phase == 3:
             print("")
 
-    def exitOpen(self, ctx:FAlloyParser.OpenContext):
+    def exitOpen(self, ctx: FAlloyParser.OpenContext):
         if phase == 3:
             print("")
 
-    def exitParagraph(self, ctx:FAlloyParser.ParagraphContext):
+    def exitParagraph(self, ctx: FAlloyParser.ParagraphContext):
         if phase == 3:
+            print("")
+
+    def exitLetOrDeclExpr(self, ctx: FAlloyParser.LetOrDeclExprContext):
+        if not isinstance(ctx.children[0], FAlloyParser.LExprContext):
             print("")
 
     def enterFuzzyDecl(self, ctx: FAlloyParser.FuzzyDeclContext):
@@ -67,7 +71,7 @@ class FAlloyPrintListener(FAlloyListener):
         if phase == 3:
             print("-> one FuzzyValue")
 
-    def enterLExpr(self, ctx:FAlloyParser.LExprContext):
+    def enterLExpr(self, ctx: FAlloyParser.LExprContext):
         if phase == 3:
             if hasattr(ctx, 'IFF'):
                 print('fuzzyIFONLYIF[ ', end='')
@@ -82,7 +86,7 @@ class FAlloyPrintListener(FAlloyListener):
             if hasattr(ctx, 'ADD_COMMA'):
                 print(', ', end='')
 
-    def exitLExpr(self, ctx:FAlloyParser.LExprContext):
+    def exitLExpr(self, ctx: FAlloyParser.LExprContext):
         if phase == 1:
             if isinstance(ctx.children[0], FAlloyParser.LCExprContext):
                 if is_fuzzy_relation(ctx.children[0]):
@@ -111,7 +115,8 @@ class FAlloyPrintListener(FAlloyListener):
                         ctx.IS_FUZZY_REL = True
 
             if len(ctx.children) == 5:
-                if is_fuzzy_relation(ctx.children[0]) or is_fuzzy_relation(ctx.children[2]) or is_fuzzy_relation(ctx.children[4]):
+                if is_fuzzy_relation(ctx.children[0]) or is_fuzzy_relation(ctx.children[2]) or is_fuzzy_relation(
+                        ctx.children[4]):
                     ctx.IS_FUZZY_REL = True
                     if not is_fuzzy_relation(ctx.children[0]):
                         ctx.children[0].SHOULD_FUZZIFY = True
@@ -132,7 +137,7 @@ class FAlloyPrintListener(FAlloyListener):
             if hasattr(ctx, 'SHOULD_FUZZIFY'):
                 print("=> fuzzyTrue else fuzzyFalse", end="")
 
-    def enterLCExpr(self, ctx:FAlloyParser.LCExprContext):
+    def enterLCExpr(self, ctx: FAlloyParser.LCExprContext):
         if phase == 3:
             if hasattr(ctx, 'NOT'):
                 print("fuzzyNOT[", end='')
@@ -142,7 +147,7 @@ class FAlloyPrintListener(FAlloyListener):
                 print(", ", end="")
 
     # Exit a parse tree produced by FAlloyParser#lCExpr.
-    def exitLCExpr(self, ctx:FAlloyParser.LCExprContext):
+    def exitLCExpr(self, ctx: FAlloyParser.LCExprContext):
         if phase == 1:
             if isinstance(ctx.children[0], FAlloyParser.JoinExprContext):
                 if is_fuzzy_relation(ctx.children[0]):
@@ -176,6 +181,15 @@ class FAlloyPrintListener(FAlloyListener):
                 print("] ", end='')
 
     def enterBinLogicExpr(self, ctx: FAlloyParser.BinLogicExprContext):
+        if phase == 3:
+            if hasattr(ctx, 'PLUSPLUS'):
+                print("fuzzyPLUSPLUS[", end="")
+            if hasattr(ctx, 'EQUAL'):
+                print("fuzzyEQUAL[", end="")
+            if hasattr(ctx, 'ADD_COMMA'):
+                print(", ", end="")
+
+    def exitBinLogicExpr(self, ctx: FAlloyParser.BinLogicExprContext):
         if phase == 1:
             if len(ctx.children) == 3 and isinstance(ctx.children[1], FAlloyParser.FuzzyCompareOpContext):
                 ctx.children[2].ADD_COMMA = True
@@ -185,49 +199,46 @@ class FAlloyPrintListener(FAlloyListener):
                     ctx.FUZZY_ADJECTIVE = ctx.children[1].children[1].children[0].symbol.text
                 else:
                     ctx.IS_FUZZY_REL = True
-        if phase == 3:
-            if hasattr(ctx, 'EQUAL'):
-                print("fuzzyEQUAL[", end="")
-            if hasattr(ctx, 'ADD_COMMA'):
-                print(", ", end="")
-
-    def exitBinLogicExpr(self, ctx: FAlloyParser.BinLogicExprContext):
-        if phase == 1:
-            if len(ctx.children) == 3 and isinstance(ctx.children[1], FAlloyParser.FuzzyCompareOpContext):
-                if len(ctx.children[1].children) == 1:
-                    ctx.IS_FUZZY_REL = True
+            elif len(ctx.children) == 3 and isinstance(ctx.children[1], FAlloyParser.OtherBinOpContext):
+                if to_string(ctx.children[1]).strip().split(' ')[-1] == '++' and is_fuzzy_relation(
+                        ctx.children[0]) and is_fuzzy_relation(ctx.children[2]):
+                    ctx.PLUSPLUS = True
+                    ctx.children[1].SKIP_PRINT = True
+                    ctx.children[2].ADD_COMMA = True
             else:
                 for child in ctx.children:
                     if is_fuzzy_relation(child):
                         ctx.IS_FUZZY_REL = True
                         break
         if phase == 3:
+            if hasattr(ctx, 'PLUSPLUS'):
+                print("] ", end="")
             if hasattr(ctx, 'EQUAL'):
                 print("] ", end="")
                 if hasattr(ctx, 'FUZZY_ADJECTIVE'):
                     print('in %s ' % adjective_mapper[getattr(ctx, 'FUZZY_ADJECTIVE')], end="")
 
-    def exitArrowExpr(self, ctx:FAlloyParser.ArrowExprContext):
+    def exitArrowExpr(self, ctx: FAlloyParser.ArrowExprContext):
         if phase == 1:
             if isinstance(ctx.children[0], FAlloyParser.JoinExprContext):
                 if is_fuzzy_relation(ctx.children[0]):
                     ctx.IS_FUZZY_REL = True
 
-    def enterJoinExpr(self, ctx:FAlloyParser.JoinExprContext):
+    def enterJoinExpr(self, ctx: FAlloyParser.JoinExprContext):
         if phase == 1:
             if len(ctx.children) == 3 and isinstance(ctx.children[0], FAlloyParser.JoinExprContext):
-                    if is_fuzzy_relation(ctx.children[0])  or is_fuzzy_relation(ctx.children[2]):
-                        ctx.children[1].SKIP_PRINT = True
-                        ctx.children[2].ADD_COMMA = True
-                        ctx.FUZZY_JOIN = True
-                        ctx.IS_FUZZY_REL = True
+                if is_fuzzy_relation(ctx.children[0]) or is_fuzzy_relation(ctx.children[2]):
+                    ctx.children[1].SKIP_PRINT = True
+                    ctx.children[2].ADD_COMMA = True
+                    ctx.FUZZY_JOIN = True
+                    ctx.IS_FUZZY_REL = True
         if phase == 3:
             if hasattr(ctx, "FUZZY_JOIN"):
                 print("fuzzyDotJoin[", end='')
             if hasattr(ctx, 'ADD_COMMA'):
                 print(", ", end="")
 
-    def exitJoinExpr(self, ctx:FAlloyParser.JoinExprContext):
+    def exitJoinExpr(self, ctx: FAlloyParser.JoinExprContext):
         if phase == 1:
             if is_fuzzy_relation(ctx.children[0]):
                 ctx.IS_FUZZY_REL = True
@@ -235,30 +246,39 @@ class FAlloyPrintListener(FAlloyListener):
                 ctx.IS_FUZZY_REL = True
         if phase == 3:
             if hasattr(ctx, "FUZZY_JOIN"):
-                print ("] ", end='')
+                print("] ", end='')
 
     def enterExpr(self, ctx: FAlloyParser.ExprContext):
+        if phase == 1:
+            if to_string(ctx.children[0]).startswith('fuzzy'):
+                ctx.IS_FUZZY_REL = True
+        if phase == 3:
+            if hasattr(ctx, "TRANSPOSE"):
+                print("fuzzyTranspose[", end='')
+            if hasattr(ctx, "TRANSITIVE"):
+                print("fuzzyTransitive[", end='')
+
+    def exitExpr(self, ctx: FAlloyParser.ExprContext):
         if phase == 1:
             if isinstance(ctx.children[0], FAlloyParser.UnLowOpContext):
                 if is_fuzzy_relation(ctx.children[1]):
                     ctx.children[0].SKIP_PRINT = True
-                    ctx.TRANSPOSE = True
+                    if ctx.children[0].children[0].symbol.text == '~':
+                        ctx.TRANSPOSE = True
+                    if ctx.children[0].children[0].symbol.text == '^':
+                        ctx.TRANSITIVE = True
                     ctx.IS_FUZZY_REL = True
-        if phase == 3:
-            if hasattr(ctx, "TRANSPOSE"):
-                print ("fuzzyTranspose[", end='')
-
-    def exitExpr(self, ctx: FAlloyParser.ExprContext):
-        if phase == 1:
             for child in ctx.children:
                 if is_fuzzy_relation(child):
                     ctx.IS_FUZZY_REL = True
                     break
         if phase == 3:
             if hasattr(ctx, "TRANSPOSE"):
-                print ("] ", end='')
+                print("] ", end='')
+            if hasattr(ctx, "TRANSITIVE"):
+                print("] ", end='')
 
-    def enterName(self, ctx:FAlloyParser.NameContext):
+    def enterName(self, ctx: FAlloyParser.NameContext):
         if phase == 1:
             if is_fuzzy_relation(ctx):
                 ctx.IS_FUZZY_REL = True
@@ -301,5 +321,7 @@ def main():
     phase = 3
     walker.walk(printer, tree)
     print_fuzzy_constarints()
+
+
 if __name__ == '__main__':
     main()

@@ -3,7 +3,7 @@ import sys
 from antlr4 import *
 from antlr4.tree.Tree import TerminalNodeImpl
 
-from FAlloyUtils import fuzzy_relations, adjective_mapper, phase
+from FAlloyUtils import fuzzy_relations, modifier_mapper, phase, fuzzy_lone_relations, fuzzy_one_relations, fuzzy_set_relations, fuzzy_some_relations
 
 from FAlloyLexer import FAlloyLexer
 from FAlloyListener import FAlloyListener
@@ -34,7 +34,7 @@ def is_fuzzy_relation(parser_node):
 
 class FAlloyPrintListener(FAlloyListener):
     def enterEveryRule(self, ctx: ParserRuleContext):
-        if phase == 2:
+        if phase == 3:
             if hasattr(ctx, "SKIP_PRINT"):
                 for child in ctx.children:
                     child.SKIP_PRINT = True
@@ -59,15 +59,37 @@ class FAlloyPrintListener(FAlloyListener):
         if not isinstance(ctx.children[0], FAlloyParser.LExprContext):
             print("")
 
-    def enterFuzzyDecl(self, ctx: FAlloyParser.FuzzyDeclContext):
+    def exitFuzzyDecl(self, ctx: FAlloyParser.FuzzyDeclContext):
         if phase == 1:
+            line_frs = []
             for child in ctx.children:
                 if isinstance(child, TerminalNodeImpl) and child.symbol.text == ':':
                     break
                 if isinstance(child, FAlloyParser.NameContext):
-                    fuzzy_relations.append(child.children[0].symbol.text)
+                    line_frs.append(child.children[0].symbol.text)
 
-    def exitFuzzyDecl(self, ctx: FAlloyParser.FuzzyDeclContext):
+            if isinstance(ctx.children[-1].children[0].children[0].children[0].children[0],
+                          FAlloyParser.UnHighOpContext):
+                ctx.children[-1].children[0].children[0].children[0].children[0].children[0].SKIP_PRINT = True
+                multiplicity_str = ctx.children[-1].children[0].children[0].children[0].children[0].children[
+                    0].symbol.text
+                if multiplicity_str == 'one':
+                    for fr in line_frs:
+                        fuzzy_one_relations.append(fr)
+                if multiplicity_str == 'some':
+                    for fr in line_frs:
+                        fuzzy_some_relations.append(fr)
+                if multiplicity_str == 'set':
+                    for fr in line_frs:
+                        fuzzy_set_relations.append(fr)
+                if multiplicity_str == 'lone':
+                    for fr in line_frs:
+                        fuzzy_lone_relations.append(fr)
+            else:
+                for fr in line_frs:
+                    fuzzy_one_relations.append(fr)
+            for fr in line_frs:
+                fuzzy_relations.append(fr)
         if phase == 3:
             print("-> one FuzzyValue")
 
@@ -87,7 +109,7 @@ class FAlloyPrintListener(FAlloyListener):
                 print(', ', end='')
 
     def exitLExpr(self, ctx: FAlloyParser.LExprContext):
-        if phase == 1:
+        if phase == 2:
             if isinstance(ctx.children[0], FAlloyParser.LCExprContext):
                 if is_fuzzy_relation(ctx.children[0]):
                     ctx.IS_FUZZY_REL = True
@@ -148,7 +170,7 @@ class FAlloyPrintListener(FAlloyListener):
 
     # Exit a parse tree produced by FAlloyParser#lCExpr.
     def exitLCExpr(self, ctx: FAlloyParser.LCExprContext):
-        if phase == 1:
+        if phase == 2:
             if isinstance(ctx.children[0], FAlloyParser.JoinExprContext):
                 if is_fuzzy_relation(ctx.children[0]):
                     ctx.IS_FUZZY_REL = True
@@ -183,14 +205,16 @@ class FAlloyPrintListener(FAlloyListener):
     def enterBinLogicExpr(self, ctx: FAlloyParser.BinLogicExprContext):
         if phase == 3:
             if hasattr(ctx, 'PLUSPLUS'):
-                print("fuzzyPLUSPLUS[", end="")
+                print("fuzzyPLUSPLUS [", end="")
             if hasattr(ctx, 'EQUAL'):
-                print("fuzzyEQUAL[", end="")
+                if hasattr(ctx, 'FUZZY_ADJECTIVE'):
+                    print('%s [' % modifier_mapper[getattr(ctx, 'FUZZY_ADJECTIVE')], end="")
+                print("fuzzyEQUAL [", end="")
             if hasattr(ctx, 'ADD_COMMA'):
                 print(", ", end="")
 
     def exitBinLogicExpr(self, ctx: FAlloyParser.BinLogicExprContext):
-        if phase == 1:
+        if phase == 2:
             if len(ctx.children) == 3 and isinstance(ctx.children[1], FAlloyParser.FuzzyCompareOpContext):
                 ctx.children[2].ADD_COMMA = True
                 ctx.children[1].SKIP_PRINT = True
@@ -216,22 +240,15 @@ class FAlloyPrintListener(FAlloyListener):
             if hasattr(ctx, 'EQUAL'):
                 print("] ", end="")
                 if hasattr(ctx, 'FUZZY_ADJECTIVE'):
-                    print('in %s ' % adjective_mapper[getattr(ctx, 'FUZZY_ADJECTIVE')], end="")
+                    print("] ", end="")
 
     def exitArrowExpr(self, ctx: FAlloyParser.ArrowExprContext):
-        if phase == 1:
+        if phase == 2:
             if isinstance(ctx.children[0], FAlloyParser.JoinExprContext):
                 if is_fuzzy_relation(ctx.children[0]):
                     ctx.IS_FUZZY_REL = True
 
     def enterJoinExpr(self, ctx: FAlloyParser.JoinExprContext):
-        if phase == 1:
-            if len(ctx.children) == 3 and isinstance(ctx.children[0], FAlloyParser.JoinExprContext):
-                if is_fuzzy_relation(ctx.children[0]) or is_fuzzy_relation(ctx.children[2]):
-                    ctx.children[1].SKIP_PRINT = True
-                    ctx.children[2].ADD_COMMA = True
-                    ctx.FUZZY_JOIN = True
-                    ctx.IS_FUZZY_REL = True
         if phase == 3:
             if hasattr(ctx, "FUZZY_JOIN"):
                 print("fuzzyDotJoin[", end='')
@@ -239,19 +256,23 @@ class FAlloyPrintListener(FAlloyListener):
                 print(", ", end="")
 
     def exitJoinExpr(self, ctx: FAlloyParser.JoinExprContext):
-        if phase == 1:
+        if phase == 2:
             if is_fuzzy_relation(ctx.children[0]):
                 ctx.IS_FUZZY_REL = True
             if len(ctx.children) == 3 and is_fuzzy_relation(ctx.children[2]):
                 ctx.IS_FUZZY_REL = True
+            if len(ctx.children) == 3 and isinstance(ctx.children[0], FAlloyParser.JoinExprContext):
+                if is_fuzzy_relation(ctx.children[0]) or is_fuzzy_relation(ctx.children[2]):
+                    ctx.children[1].SKIP_PRINT = True
+                    ctx.children[2].ADD_COMMA = True
+                    ctx.FUZZY_JOIN = True
+                    ctx.IS_FUZZY_REL = True
+
         if phase == 3:
             if hasattr(ctx, "FUZZY_JOIN"):
                 print("] ", end='')
 
     def enterExpr(self, ctx: FAlloyParser.ExprContext):
-        if phase == 1:
-            if to_string(ctx.children[0]).startswith('fuzzy'):
-                ctx.IS_FUZZY_REL = True
         if phase == 3:
             if hasattr(ctx, "TRANSPOSE"):
                 print("fuzzyTranspose[", end='')
@@ -259,7 +280,9 @@ class FAlloyPrintListener(FAlloyListener):
                 print("fuzzyTransitive[", end='')
 
     def exitExpr(self, ctx: FAlloyParser.ExprContext):
-        if phase == 1:
+        if phase == 2:
+            if to_string(ctx.children[0]).startswith('fuzzy'):
+                ctx.IS_FUZZY_REL = True
             if isinstance(ctx.children[0], FAlloyParser.UnLowOpContext):
                 if is_fuzzy_relation(ctx.children[1]):
                     ctx.children[0].SKIP_PRINT = True
@@ -278,8 +301,8 @@ class FAlloyPrintListener(FAlloyListener):
             if hasattr(ctx, "TRANSITIVE"):
                 print("] ", end='')
 
-    def enterName(self, ctx: FAlloyParser.NameContext):
-        if phase == 1:
+    def exitName(self, ctx: FAlloyParser.NameContext):
+        if phase == 2:
             if is_fuzzy_relation(ctx):
                 ctx.IS_FUZZY_REL = True
 
@@ -295,8 +318,12 @@ class FAlloyPrintListener(FAlloyListener):
 
 def print_fuzzy_constarints():
     print("fact {")
-    for relation in fuzzy_relations:
+    for relation in fuzzy_one_relations:
         print("fuzzyMAXSUM [%s]" % relation)
+    for relation in fuzzy_some_relations:
+        print("fuzzyAtLeastSUM [%s]" % relation)
+    for relation in fuzzy_lone_relations:
+        print("fuzzyAtMostSUM [%s]" % relation)
     print("}")
 
 

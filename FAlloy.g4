@@ -6,7 +6,7 @@ module : 'module' name  ('['  ('exactly')? name  (',' ('exactly')? NUMBER)*    '
 
 open : ('private')?  'open'  name  ('[' (ref (',' ref)*) ']')?  ('as' name)?;
 
-paragraph :  factDecl | assertDecl | funDecl | cmdDecl | enumDecl | sigDecl;
+paragraph :  factDecl | assertDecl | funDecl | predDecl | cmdDecl | enumDecl | sigDecl;
 
 
 factDecl : 'fact' name? block;
@@ -14,8 +14,8 @@ factDecl : 'fact' name? block;
 assertDecl : 'assert' name? block;
 funDecl : ('private')? 'fun' (ref '.')? name '(' (decl (',' decl)*)? ')' ':' rootExpr block
         | ('private')? 'fun' (ref '.')? name '[' (decl (',' decl)*)? ']' ':' rootExpr block
-        | ('private')? 'fun' (ref '.')? name                ':' rootExpr block
-        | ('private')? 'pred' (ref '.')? name '(' (decl (',' decl)*)? ')' block
+        | ('private')? 'fun' (ref '.')? name                ':' rootExpr block;
+predDecl: ('private')? 'pred' (ref '.')? name '(' (decl (',' decl)*)? ')' block
         | ('private')? 'pred' (ref '.')? name '[' (decl (',' decl)*)? ']' block
         | ('private')? 'pred' (ref '.')? name                block;
 

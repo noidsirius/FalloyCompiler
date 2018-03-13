@@ -3,7 +3,8 @@ import sys
 from antlr4 import *
 from antlr4.tree.Tree import TerminalNodeImpl
 
-from FAlloyUtils import fuzzy_relations, modifier_mapper, phase, fuzzy_lone_relations, fuzzy_one_relations, fuzzy_set_relations, fuzzy_some_relations
+from FAlloyUtils import fuzzy_relations, modifier_mapper, phase,\
+    fuzzy_lone_relations, fuzzy_one_relations, fuzzy_set_relations, fuzzy_some_relations, predicates
 
 from FAlloyLexer import FAlloyLexer
 from FAlloyListener import FAlloyListener
@@ -13,7 +14,13 @@ STR_result = ""
 
 
 class StringListener(FAlloyListener):
+    def enterEveryRule(self, ctx:ParserRuleContext):
+        if hasattr(ctx, "SKIP_PRINT"):
+            for child in ctx.children:
+                child.SKIP_PRINT = True
     def visitTerminal(self, node: TerminalNode):
+        if hasattr(node, "SKIP_PRINT"):
+            return
         global STR_result
         STR_result += node.symbol.text + ' '
 
@@ -24,9 +31,46 @@ def to_string(parser_node):
     printer = StringListener()
     walker = ParseTreeWalker()
     walker.walk(printer, parser_node)
-    v = STR_result
     return STR_result
 
+
+class CallPredListener(FAlloyListener):
+    def enterEveryRule(self, ctx:ParserRuleContext):
+        if hasattr(ctx, "SKIP_PRINT"):
+            for child in ctx.children:
+                child.SKIP_PRINT = True
+
+    def enterDecl(self, ctx:FAlloyParser.DeclContext):
+        for child in ctx.children:
+            if isinstance(child, TerminalNode):
+                if child.symbol.text in ['private', 'disj']:
+                    child.SKIP_PRINT = True
+        ctx.children[-1].SKIP_PRINT = True
+        ctx.children[-2].SKIP_PRINT = True
+
+    def visitTerminal(self, node: TerminalNode):
+        if hasattr(node, "SKIP_PRINT"):
+            return
+        global STR_result
+        STR_result += node.symbol.text + ' '
+
+
+def str_call_pred(parser_node):
+    global STR_result
+    STR_result = ""
+    for child in parser_node.children:
+        child.SKIP_PRINT = True
+        if child.symbol.text == 'pred':
+            break
+    parser_node.children[-1].SKIP_PRINT = True
+    printer = CallPredListener()
+    walker = ParseTreeWalker()
+    walker.walk(printer, parser_node)
+    for child in parser_node.children:
+        delattr(child,'SKIP_PRINT')
+        if child.symbol.text == 'pred':
+            break
+    return STR_result
 
 def is_fuzzy_relation(parser_node):
     return hasattr(parser_node, "IS_FUZZY_REL") or to_string(parser_node).strip().split(' ')[-1] in fuzzy_relations
@@ -35,9 +79,16 @@ def is_fuzzy_relation(parser_node):
 class FAlloyPrintListener(FAlloyListener):
     def enterEveryRule(self, ctx: ParserRuleContext):
         if phase == 3:
+            if hasattr(ctx, "BEFORE_TEXT"):
+                print(ctx.BEFORE_TEXT, end=" ")
             if hasattr(ctx, "SKIP_PRINT"):
                 for child in ctx.children:
                     child.SKIP_PRINT = True
+
+    def exitEveryRule(self, ctx: ParserRuleContext):
+        if phase == 3:
+            if hasattr(ctx, "AFTER_TEXT"):
+                print(ctx.AFTER_TEXT, end=" ")
 
     def exitSpecification(self, ctx: FAlloyParser.SpecificationContext):
         if phase == 3:
@@ -306,6 +357,15 @@ class FAlloyPrintListener(FAlloyListener):
             if is_fuzzy_relation(ctx):
                 ctx.IS_FUZZY_REL = True
 
+    def exitPredDecl(self, ctx:FAlloyParser.PredDeclContext):
+        if phase == 2:
+            predicates.append(ctx)
+            if ctx.children[0].symbol.text == 'pred':
+                ctx.children[0].ALTERED_TEXT = 'fun'
+            elif ctx.children[1].symbol.text == 'pred':
+                ctx.children[1].ALTERED_TEXT = 'fun'
+            ctx.children[-1].BEFORE_TEXT = ': FuzzyValue'
+
     def visitTerminal(self, node: TerminalNode):
         if phase == 3:
             if hasattr(node, "SKIP_PRINT"):
@@ -313,7 +373,10 @@ class FAlloyPrintListener(FAlloyListener):
             if isinstance(node.parentCtx, FAlloyParser.FuzzyDeclContext):
                 if node.symbol.text == 'fuzzy':
                     return
-            print(node.symbol.text, end=" ")
+            if hasattr(node, "ALTERED_TEXT"):
+                print(node.ALTERED_TEXT, end=" ")
+            else:
+                print(node.symbol.text, end=" ")
 
 
 def print_fuzzy_constarints():
@@ -347,6 +410,12 @@ def main():
     walker.walk(printer, tree)
     phase = 3
     walker.walk(printer, tree)
+    for pred_node in predicates:
+        pred_node.children[-1].SKIP_PRINT = True
+        print(to_string(pred_node))
+        delattr(pred_node.children[-1], "SKIP_PRINT")
+        print("{\n%s in AlmostTrue\n}"%str_call_pred(pred_node))
+
     print_fuzzy_constarints()
 
 

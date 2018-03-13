@@ -71,6 +71,15 @@ class FAlloyListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by FAlloyParser#predDecl.
+    def enterPredDecl(self, ctx:FAlloyParser.PredDeclContext):
+        pass
+
+    # Exit a parse tree produced by FAlloyParser#predDecl.
+    def exitPredDecl(self, ctx:FAlloyParser.PredDeclContext):
+        pass
+
+
     # Enter a parse tree produced by FAlloyParser#cmdDecl.
     def enterCmdDecl(self, ctx:FAlloyParser.CmdDeclContext):
         pass

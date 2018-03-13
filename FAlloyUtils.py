@@ -10,6 +10,8 @@ fuzzy_lone_relations = []
 
 modifier_mapper = {'none': 'fuzzyFalse', 'slightly': 'fuzzySlightly', 'half' : 'fuzzyHalf', 'mostly': 'fuzzyMostly', 'fully': 'fuzzyTrue'}
 
-predicates = []
+predicates_nodes = []
+predicates_names = []
+run_pred_names = []
 
 phase = 0
